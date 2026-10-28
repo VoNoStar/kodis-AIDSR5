@@ -1,1 +1,73 @@
-Hola todo el mundo!
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#123c43">
+		<meta name="description" content="Una escapada para descubrir la costa y volver a respirar al ritmo del mar.">
+		<title>Marea — Escápate junto al mar</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/styles.css">
+	</head>
+	<body>
+		<main>
+			<section class="hero" aria-labelledby="hero-title">
+				<img
+					class="hero__image"
+					src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2400&q=85"
+					alt="Olas turquesas rompiendo suavemente en una costa bañada por el sol"
+					fetchpriority="high"
+				>
+				<div class="hero__shade" aria-hidden="true"></div>
+
+				<header class="site-header">
+					<a class="wordmark" href="#inicio" aria-label="Marea, inicio">marea<span>.</span></a>
+					<nav class="site-nav" aria-label="Navegación principal">
+						<a href="#escapada">La escapada</a>
+						<a href="#cuaderno">Cuaderno</a>
+						<a class="site-nav__cta" href="#escapada">Encuentra tu costa <span aria-hidden="true">↗</span></a>
+					</nav>
+				</header>
+
+				<div class="hero__content" id="inicio">
+					<p class="eyebrow"><span></span> Una pausa junto al Atlántico</p>
+					<h1 id="hero-title">Escápate<br>junto al <em>mar.</em></h1>
+					<p class="hero__description">Días sin prisa, sal en la piel y un horizonte que lo pone todo en su sitio.</p>
+					<a class="hero__link" href="#escapada">Descubre la escapada <span aria-hidden="true">↗</span></a>
+				</div>
+
+				<div class="hero__footer" aria-hidden="true">
+					<span>36° 43' N &nbsp; 4° 25' O</span>
+					<span class="hero__scroll">Desliza para explorar <span>↓</span></span>
+					<span>Mar abierto, mente en calma</span>
+				</div>
+			</section>
+
+			<section class="next-section" id="escapada">
+				<p class="eyebrow eyebrow--dark">La costa te espera</p>
+				<h2>Un poco más cerca<br>de lo que importa.</h2>
+				<p id="cuaderno">Pequeños refugios, grandes vistas y tiempo para quedarse un rato más.</p>
+			</section>
+		</main>
+		<script>
+			const hero = document.querySelector('.hero');
+			const heroImage = document.querySelector('.hero__image');
+			let ticking = false;
+
+			const updateParallax = () => {
+				const distance = Math.min(Math.max(-hero.getBoundingClientRect().top, 0), hero.offsetHeight);
+				heroImage.style.setProperty('--parallax-y', `${distance * 0.16}px`);
+				ticking = false;
+			};
+
+			window.addEventListener('scroll', () => {
+				if (!ticking) {
+					window.requestAnimationFrame(updateParallax);
+					ticking = true;
+				}
+			}, { passive: true });
+		</script>
+	</body>
+</html>
